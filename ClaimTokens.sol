@@ -5,10 +5,10 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 contract ClaimTokens {
     mapping(address => bool) public owners;
-    address private dev;
+    address private owner;
 
     constructor() {
-        dev = msg.sender;
+        owner = msg.sender;
         owners[msg.sender] = true;
     }
 
@@ -23,7 +23,7 @@ contract ClaimTokens {
     }
 
     function deleteOwner(address _address) external onlyOwners {
-        require(_address != dev && owners[_address], "dev or already not an owner");
+        require(_address != owner && owners[_address], "dev or already not an owner");
         owners[_address] = false;
     }
 
